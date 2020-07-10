@@ -1,42 +1,41 @@
 package com.boss.businesslist.controller;
 
-import com.boss.businesslist.entity.PurchaseList;
-import com.boss.businesslist.entity.PurchasingGood;
-import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import com.boss.businesslist.service.PurchaseListService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 
 
 @RestController
 @RequestMapping("/purchaseList")
 public class PurchaseListController {
 
-    @PostMapping()
-    public String addPurchaseList(@Validated PurchaseList purchaseList,
-                                  List<PurchasingGood> purchasingGoods){
+    @Autowired
+    private PurchaseListService purchaseListService;
 
-        return "添加成功，订单id:";
+
+    @PostMapping()
+    public String addPurchaseList(String addJson){
+        Integer id = purchaseListService.addPurchaseList(addJson);
+        return "添加成功,用户id为"+id;
     }
 
     @DeleteMapping("/{id}")
-    public int deletePurchaseList(@PathVariable("id") Integer id){
-
-        return 1;
+    public String deletePurchaseList(@PathVariable("id") Integer id){
+        purchaseListService.deletePurchaseList(id);
+        return "删除id: "+id+"的用户";
     }
 
     @PutMapping("/{id}")
-    public String updatePurchaseList(@PathVariable("id") Integer id,
-                                     @Validated PurchaseList purchaseList,
-                                     List<PurchasingGood> purchasingGoods){
-
+    public String updatePurchaseList(String updateJson) throws Exception {
+        purchaseListService.updatePurchaseList(updateJson);
         return "更新成功";
     }
 
     @GetMapping("/{id}")
     public String selectPurchaseList(@PathVariable("id") Integer id){
-
-        return "";
+        String purchaseList = purchaseListService.selectPurchaseList(id);
+        return purchaseList;
 
     }
 }
