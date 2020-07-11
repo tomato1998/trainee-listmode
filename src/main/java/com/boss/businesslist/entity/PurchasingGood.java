@@ -2,11 +2,7 @@ package com.boss.businesslist.entity;
 
 import com.alibaba.fastjson.annotation.JSONField;
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
 import tk.mybatis.mapper.annotation.KeySql;
-
 import javax.persistence.Id;
 import java.io.Serializable;
 import java.util.Date;
@@ -23,7 +19,7 @@ public class PurchasingGood implements Serializable {
     private String type;
     private Integer num;
     private String placeAndUse;
-    @JSONField(name="DATE OF BIRTH", format="dd/MM/yyyy")
+    @JSONField(name="usagedTime", format="YYYY-MM-DD HH:MM:SS")
     private Date usagedTime;
 
 }

@@ -2,13 +2,8 @@ package com.boss.businesslist.entity;
 
 
 import com.alibaba.fastjson.annotation.JSONField;
-import com.sun.istack.internal.NotNull;
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
 import tk.mybatis.mapper.annotation.KeySql;
-
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Transient;
@@ -27,12 +22,9 @@ public class PurchaseList implements Serializable {
     @Id
     @KeySql(useGeneratedKeys = true)
     private Integer id;
-    @NotNull
     private String applicationDepartment;
-    @NotNull
-    @JSONField(name="DATE OF BIRTH", format="dd/MM/yyyy")
+    @JSONField(name="applicationDate", format="YYYY-MM-DD HH:MM:SS")
     private Date applicationDate;
-    @NotNull
     private String applicant;
     private String generalManagerApprovalOpinion;
     private String mineDirectorApprovalOpinion;

@@ -15,27 +15,32 @@ public class PurchaseListController {
 
 
     @PostMapping()
-    public String addPurchaseList(String addJson){
+    public String addPurchaseList(@RequestBody String addJson){
         Integer id = purchaseListService.addPurchaseList(addJson);
-        return "添加成功,用户id为"+id;
+        return "add PurchaseList successfully , purchaseList id is"+id;
     }
 
     @DeleteMapping("/{id}")
     public String deletePurchaseList(@PathVariable("id") Integer id){
         purchaseListService.deletePurchaseList(id);
-        return "删除id: "+id+"的用户";
+        return "delete PurchaseList successfully , id: "+id;
     }
 
     @PutMapping("/{id}")
-    public String updatePurchaseList(String updateJson) throws Exception {
+    public String updatePurchaseList(@RequestBody String updateJson) throws Exception {
         purchaseListService.updatePurchaseList(updateJson);
-        return "更新成功";
+        return "update PurchaseList successfully";
     }
 
     @GetMapping("/{id}")
     public String selectPurchaseList(@PathVariable("id") Integer id){
-        String purchaseList = purchaseListService.selectPurchaseList(id);
-        return purchaseList;
+        return purchaseListService.selectPurchaseList(id);
+
+    }
+
+    @GetMapping("/all")
+    public String selectAll(){
+        return purchaseListService.selectAll();
 
     }
 }

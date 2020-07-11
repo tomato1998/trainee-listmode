@@ -17,7 +17,7 @@
     <properties>
         <java.version>1.8</java.version>
         <tk_mybatis.version>2.1.5</tk_mybatis.version>
-        <fastjson_version>1.2.55</fastjson_version>
+        <fastjson_version>1.2.72</fastjson_version>
     </properties>
 
     <dependencies>
@@ -58,6 +58,10 @@
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
             <version>${fastjson_version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-thymeleaf</artifactId>
         </dependency>
     </dependencies>
 
