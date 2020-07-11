@@ -15,7 +15,9 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
-
+/**
+ * @author li da shan
+ */
 @Service
 @Transactional(readOnly = false,propagation = Propagation.REQUIRED)
 @Slf4j
@@ -38,6 +40,7 @@ public class PurchaseListServiceImpl implements PurchaseListService {
            good.setListId(listId);
             purchasingGoodMapper.insert(good);
         }
+        //int i=1/0;
         return listId;
 
     }
@@ -50,7 +53,7 @@ public class PurchaseListServiceImpl implements PurchaseListService {
     }
 
     @Override
-    public String updatePurchaseList(String updateJson) throws Exception{
+    public void updatePurchaseList(String updateJson) throws Exception{
         log.info("==================update=====================");
         log.info("PurchaseListService已接收json:"+updateJson);
         PurchaseList purchaseList=JSON.parseObject(updateJson,PurchaseList.class);
@@ -60,8 +63,6 @@ public class PurchaseListServiceImpl implements PurchaseListService {
         }
         this.deletePurchaseList(purchaseList.getId());
         this.addPurchaseList(updateJson);
-        return "更新成功";
-
     }
 
     @Override

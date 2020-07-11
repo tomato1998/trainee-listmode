@@ -8,6 +8,10 @@ import java.io.Serializable;
 import java.util.Date;
 
 
+/**
+ * 采购商品类
+ * @author li da shan
+ */
 @Data
 public class PurchasingGood implements Serializable {
 

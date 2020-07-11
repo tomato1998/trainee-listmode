@@ -12,8 +12,8 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * @author 李大山
- *
+ * 采购清单类
+ * @author li da shan
  */
 @Data
 @Table()

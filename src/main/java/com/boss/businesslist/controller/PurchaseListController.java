@@ -6,6 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 
+/**
+ * 采购清单控制器
+ * @author li da shan
+ */
 @RestController
 @RequestMapping("/purchaseList")
 public class PurchaseListController {

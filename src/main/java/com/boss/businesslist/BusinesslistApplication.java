@@ -5,6 +5,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import tk.mybatis.spring.annotation.MapperScan;
 
+/**
+ * @author li da shan
+ */
 @SpringBootApplication
 @EnableTransactionManagement
 @MapperScan(basePackages = "com.boss.businesslist.dao")
