@@ -10,7 +10,7 @@ import tk.mybatis.spring.annotation.MapperScan;
  */
 @SpringBootApplication
 @EnableTransactionManagement
-@MapperScan(basePackages = "com.boss.businesslist.dao")
+@MapperScan("com.boss.businesslist.dao")
 public class BusinesslistApplication {
 
     public static void main(String[] args) {

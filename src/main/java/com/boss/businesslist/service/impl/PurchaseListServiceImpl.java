@@ -7,11 +7,11 @@ import com.boss.businesslist.entity.PurchaseList;
 import com.boss.businesslist.entity.PurchasingGood;
 import com.boss.businesslist.service.PurchaseListService;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,76 +23,71 @@ import java.util.List;
 @Slf4j
 public class PurchaseListServiceImpl implements PurchaseListService {
 
-    @Autowired
+    @Resource
     private PurchaseListMapper purchaseListMapper;
-    @Autowired
+    @Resource
     private PurchasingGoodMapper purchasingGoodMapper;
 
     @Override
-    public Integer addPurchaseList(String addJson) {
+    public Integer addPurchaseList(PurchaseList purchaseList) {
         log.info("==================add=====================");
-        log.info("PurchaseListService已接收json:"+addJson);
-        PurchaseList purchaseList=JSON.parseObject(addJson,PurchaseList.class);
+        log.info("purchaseList:"+purchaseList);
         List<PurchasingGood> purchasingGoods = purchaseList.getPurchasingGoods();
-        log.info("解析结果:"+purchaseList);
         Integer listId = purchaseListMapper.insert(purchaseList);
         for (PurchasingGood good:purchasingGoods) {
            good.setListId(listId);
-            purchasingGoodMapper.insert(good);
+           purchasingGoodMapper.insert(good);
         }
         //int i=1/0;
         return listId;
-
     }
 
     @Override
-    public void deletePurchaseList(Integer id) {
+    public int deletePurchaseList(Integer id) {
         log.info("==================delete=====================");
         log.info("PurchaseListService正在执行操作删除id："+id+"的采购清单");
-        purchaseListMapper.deleteByPrimaryKey(id);
+        return purchaseListMapper.deleteByPrimaryKey(id);
     }
 
     @Override
-    public void updatePurchaseList(String updateJson) throws Exception{
+    public int updatePurchaseList(PurchaseList purchaseList) {
         log.info("==================update=====================");
-        log.info("PurchaseListService已接收json:"+updateJson);
-        PurchaseList purchaseList=JSON.parseObject(updateJson,PurchaseList.class);
-        if (purchaseList.getId()==null){
-            log.info("更新失败，未指定用户的id");
-            throw new RuntimeException("用户id为空");
+        log.info("PurchaseListService:"+purchaseList);
+        int deleteResult = this.deletePurchaseList(purchaseList.getId());
+        int addResult = this.addPurchaseList(purchaseList);
+        if(addResult>=0&deleteResult>=0){
+            return 1;
         }
-        this.deletePurchaseList(purchaseList.getId());
-        this.addPurchaseList(updateJson);
+        return 0;
+
     }
 
     @Override
     @Transactional(readOnly = true,propagation = Propagation.SUPPORTS)
-    public String selectPurchaseList(Integer id) {
+    public PurchaseList selectPurchaseList(Integer id) {
         log.info("==================seleteById=====================");
         log.info("PurchaseListService正在执行操作查询id："+id+"的采购清单");
         PurchaseList purchaseList = purchaseListMapper.selectByPrimaryKey(id);
         if(purchaseList==null){
-            return "无此采购订单";
+            return null;
         }else {
             PurchasingGood purchasingGood = new PurchasingGood();
             purchasingGood.setListId(id);
             List<PurchasingGood> purchasingGoods = purchasingGoodMapper.select(purchasingGood);
             purchaseList.setPurchasingGoods(purchasingGoods);
-            String jsonString = JSON.toJSONString(purchaseList);
-            System.out.println(jsonString);
-            return jsonString;
+            log.info("查询结果: "+purchaseList);
+            return purchaseList;
         }
 
     }
 
     @Override
-    public String selectAll() {
+    public List<PurchaseList> selectAll() {
         log.info("==================seleteAll=====================");
-        log.info("PurchaseListService正在执行操作查询所有的采购清单");
         List<PurchasingGood> purchasingGoods = purchasingGoodMapper.selectAll();
         List<PurchaseList> purchaseLists = purchaseListMapper.selectAll();
         if(purchaseLists.isEmpty()||purchasingGoods.isEmpty()){
-            return "无采购清单";
+            return null;
         }else {
             for (PurchaseList purchaseList:purchaseLists) {
                 Integer listId = purchaseList.getId();
@@ -105,6 +100,6 @@ public class PurchaseListServiceImpl implements PurchaseListService {
                 purchaseList.setPurchasingGoods(goods);
             }
         }
-        return JSON.toJSONString(purchaseLists);
+        return purchaseLists;
     }
 }
