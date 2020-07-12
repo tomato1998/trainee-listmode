@@ -49,6 +49,9 @@ public class PurchaseListServiceImpl implements PurchaseListService {
         return purchaseListMapper.deleteByPrimaryKey(id);
     }
 
+    /**
+     * 默认前端已校验id
+     */
     @Override
     public int updatePurchaseList(PurchaseList purchaseList) {
         log.info("==================update=====================");
