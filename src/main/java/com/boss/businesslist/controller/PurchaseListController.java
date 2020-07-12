@@ -14,6 +14,30 @@ import java.util.List;
 /**
  * 采购清单控制器
  * @author li da shan
+ * content:    Postman测试Json
+ * {
+ *     "id": 1,
+ *     "applicationDepartment": "人事部",
+ *     "applicationDate": "2020-07-11 12:00:00",
+ *     "applicant": "tomato",
+ *     "generalManagerApprovalOpinion": "同意",
+ *     "mineDirectorApprovalOpinion": "同意",
+ *     "departmentApprovalOpinion": "同意",
+ *     "warehouseVerificationOpinion": "同意",
+ *     "purchasingDepartmentOpinion": "同意",
+ *     "purchasingGoods": [
+ *         {
+ *             "id": null,
+ *             "listId": null,
+ *             "name": "挖掘机",
+ *             "type": "工程器械",
+ *             "num": 99,
+ *             "placeAndUse": "福州",
+ *             "usagedTime": "2020-09-01 12:00:00"
+ *         }
+ *     ]
+ * }
+ *
  */
 @RestController
 @RequestMapping("/purchaseList")
