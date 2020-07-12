@@ -27,7 +27,7 @@ public class PurchaseListController {
     @PostMapping()
     public CommonResult addPurchaseList(@RequestBody PurchaseList purchaseList){
         log.info("****************"+purchaseList);
-        Integer result = purchaseListService.addPurchaseList(purchaseList);
+        int result = purchaseListService.addPurchaseList(purchaseList);
         if(result > 0){
             return new CommonResult(200,"添加成功",result);
         }else {

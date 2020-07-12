@@ -16,7 +16,7 @@ public interface PurchaseListService {
      * @param purchaseList 新增采购清单
      * @return 插入数据库的订单编号
      */
-    public Integer addPurchaseList(PurchaseList purchaseList);
+    public int addPurchaseList(PurchaseList purchaseList);
 
     /**
      * 根据采购清单编号删除订单

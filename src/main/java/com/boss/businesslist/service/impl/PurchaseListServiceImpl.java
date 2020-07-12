@@ -29,7 +29,7 @@ public class PurchaseListServiceImpl implements PurchaseListService {
     private PurchasingGoodMapper purchasingGoodMapper;
 
     @Override
-    public Integer addPurchaseList(PurchaseList purchaseList) {
+    public int addPurchaseList(PurchaseList purchaseList) {
         log.info("==================add=====================");
         log.info("purchaseList:"+purchaseList);
         List<PurchasingGood> purchasingGoods = purchaseList.getPurchasingGoods();
