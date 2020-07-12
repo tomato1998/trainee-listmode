@@ -3,6 +3,7 @@ package com.boss.businesslist.controller;
 import com.boss.businesslist.entity.CommonResult;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
@@ -15,7 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 public class GlobalExceptionHandle {
 
     @ExceptionHandler(Exception.class)
-    public CommonResult exceptionHandle(Exception e){
+    public @ResponseBody CommonResult exceptionHandle(Exception e){
         return new CommonResult(500,"something wrong",e);
     }
 }
