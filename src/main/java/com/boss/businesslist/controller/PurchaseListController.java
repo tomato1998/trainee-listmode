@@ -49,7 +49,7 @@ public class PurchaseListController {
 
 
     @PostMapping()
-    public CommonResult addPurchaseList(@RequestBody PurchaseList purchaseList){
+    public CommonResult addPurchaseList(@RequestBody PurchaseList purchaseList) throws Exception {
         log.info("****************"+purchaseList);
         int result = purchaseListService.addPurchaseList(purchaseList);
         if(result > 0){
@@ -60,7 +60,7 @@ public class PurchaseListController {
     }
 
     @DeleteMapping("/{id}")
-    public CommonResult deletePurchaseList(@PathVariable("id") Integer id){
+    public CommonResult deletePurchaseList(@PathVariable("id") Integer id) throws Exception {
         int result = purchaseListService.deletePurchaseList(id);
         if(result > 0){
             return new CommonResult(200,"删除成功",result);
@@ -80,7 +80,7 @@ public class PurchaseListController {
     }
 
     @GetMapping("/{id}")
-    public CommonResult selectPurchaseList(@PathVariable("id") Integer id){
+    public CommonResult selectPurchaseList(@PathVariable("id") Integer id) throws Exception {
         PurchaseList purchaseList = purchaseListService.selectPurchaseList(id);
         if(purchaseList != null){
             return new CommonResult(200,"查询成功",purchaseList);
@@ -91,7 +91,7 @@ public class PurchaseListController {
     }
 
     @GetMapping("/all")
-    public CommonResult selectAll(){
+    public CommonResult selectAll() throws Exception {
         List<PurchaseList> purchaseLists =  purchaseListService.selectAll();
         if(purchaseLists!=null&!purchaseLists.isEmpty()){
             return new CommonResult(200,"查询成功",purchaseLists);

@@ -29,7 +29,7 @@ public class PurchaseListServiceImpl implements PurchaseListService {
     private PurchasingGoodMapper purchasingGoodMapper;
 
     @Override
-    public int addPurchaseList(PurchaseList purchaseList) {
+    public int addPurchaseList(PurchaseList purchaseList) throws Exception{
         log.info("==================add=====================");
         log.info("purchaseList:"+purchaseList);
         List<PurchasingGood> purchasingGoods = purchaseList.getPurchasingGoods();
@@ -43,7 +43,7 @@ public class PurchaseListServiceImpl implements PurchaseListService {
     }
 
     @Override
-    public int deletePurchaseList(Integer id) {
+    public int deletePurchaseList(Integer id) throws Exception{
         log.info("==================delete=====================");
         log.info("PurchaseListService正在执行操作删除id："+id+"的采购清单");
         return purchaseListMapper.deleteByPrimaryKey(id);
@@ -53,7 +53,7 @@ public class PurchaseListServiceImpl implements PurchaseListService {
      * 默认前端已校验id
      */
     @Override
-    public int updatePurchaseList(PurchaseList purchaseList) {
+    public int updatePurchaseList(PurchaseList purchaseList) throws Exception{
         log.info("==================update=====================");
         log.info("PurchaseListService:"+purchaseList);
         int deleteResult = this.deletePurchaseList(purchaseList.getId());
@@ -67,7 +67,7 @@ public class PurchaseListServiceImpl implements PurchaseListService {
 
     @Override
     @Transactional(readOnly = true,propagation = Propagation.SUPPORTS)
-    public PurchaseList selectPurchaseList(Integer id) {
+    public PurchaseList selectPurchaseList(Integer id) throws Exception{
         log.info("==================seleteById=====================");
         log.info("PurchaseListService正在执行操作查询id："+id+"的采购清单");
         PurchaseList purchaseList = purchaseListMapper.selectByPrimaryKey(id);
@@ -85,7 +85,7 @@ public class PurchaseListServiceImpl implements PurchaseListService {
     }
 
     @Override
-    public List<PurchaseList> selectAll() {
+    public List<PurchaseList> selectAll() throws Exception{
         log.info("==================seleteAll=====================");
         List<PurchasingGood> purchasingGoods = purchasingGoodMapper.selectAll();
         List<PurchaseList> purchaseLists = purchaseListMapper.selectAll();
