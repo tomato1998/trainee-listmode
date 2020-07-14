@@ -25,7 +25,6 @@ public class User {
     @Id
     @KeySql(useGeneratedKeys = true)
     private Long id;
-    //@JSONField(name = "name")
     @Column(name="name")
     private String username;
     private String password;
