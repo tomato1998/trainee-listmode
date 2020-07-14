@@ -17,6 +17,6 @@ public class GlobalExceptionHandle {
 
     @ExceptionHandler(Exception.class)
     public @ResponseBody CommonResult exceptionHandle(Exception e){
-        return new CommonResult(500,"something wrong",e);
+        return new CommonResult(500,"  O.O  简陋的系统，一不小心就出现了异常  O_O ","定义使用了全局异常处理处理异常信息，接下来是异常信息:"+e);
     }
 }

@@ -64,7 +64,7 @@
         <!-- 定义控制台appender 作用:把日志输出到控制台 class="ch.qos.logback.core.ConsoleAppender" -->
     <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
         <layout class="ch.qos.logback.classic.PatternLayout">
-            <pattern>%date %level [%thread] %logger{10}.%class{0}#%method[%file:%line] %n%msg%n</pattern>
+            <pattern>%date [%level] [%thread] %logger{10}.%class{0}#%method[%file:%line] %n%msg%n</pattern>
         </layout>
     </appender>
 

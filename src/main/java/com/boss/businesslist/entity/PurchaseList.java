@@ -20,6 +20,7 @@ import java.util.List;
  */
 
 @Data
+@Table(name = "purchase_list")
 public class PurchaseList implements Serializable {
 
     @Id
